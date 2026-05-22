@@ -90,10 +90,7 @@ dump_redis() {
             fi
             sleep 1
         done
-        docker cp "${REDIS_CONTAINER}:/data/dump.rdb" "${OUT_DIR}/redis.rdb" 2>/dev/null || \
-        docker exec "${REDIS_CONTAINER}" redis-cli -a "${REDIS_PASSWORD}" --no-auth-warning \
-            --rdb /tmp/dump.rdb >/dev/null && \
-        docker cp "${REDIS_CONTAINER}:/tmp/dump.rdb" "${OUT_DIR}/redis.rdb"
+        docker cp "${REDIS_CONTAINER}:/data/dump.rdb" "${OUT_DIR}/redis.rdb"
     elif command -v redis-cli >/dev/null 2>&1; then
         redis-cli -h "${REDIS_HOST}" -p "${REDIS_PORT}" -a "${REDIS_PASSWORD}" --no-auth-warning \
             --rdb "${OUT_DIR}/redis.rdb"
