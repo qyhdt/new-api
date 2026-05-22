@@ -115499,3 +115499,283 @@ Please check https://pkg.go.dev/github.com/gin-gonic/gin#readme-don-t-trust-all-
 2026/05/22 13:29:29 [32m/Users/yang/Documents/devworkspace/new-api/model/task.go:310
 [0m[33m[2.669ms] [34;1m[rows:0][0m SELECT * FROM "tasks" WHERE progress != '100%' AND status != 'FAILURE' AND status != 'SUCCESS' ORDER BY id LIMIT 1000
 [SYS] 2026/05/22 - 13:29:29 | 任务进度轮询完成 
+
+2026/05/22 13:29:44 [32m/Users/yang/Documents/devworkspace/new-api/model/midjourney.go:97
+[0m[33m[1.416ms] [34;1m[rows:0][0m SELECT * FROM "midjourneys" WHERE progress != '100%'
+[SYS] 2026/05/22 - 13:29:44 | 任务进度轮询开始 
+
+2026/05/22 13:29:44 [32m/Users/yang/Documents/devworkspace/new-api/model/task.go:299
+[0m[33m[1.642ms] [34;1m[rows:0][0m SELECT * FROM "tasks" WHERE progress != '100%' AND status NOT IN ('FAILURE','SUCCESS') AND submit_time < 1779341384 ORDER BY submit_time LIMIT 100
+
+2026/05/22 13:29:44 [32m/Users/yang/Documents/devworkspace/new-api/model/task.go:310
+[0m[33m[0.518ms] [34;1m[rows:0][0m SELECT * FROM "tasks" WHERE progress != '100%' AND status != 'FAILURE' AND status != 'SUCCESS' ORDER BY id LIMIT 1000
+[SYS] 2026/05/22 - 13:29:44 | 任务进度轮询完成 
+
+2026/05/22 13:29:59 [32m/Users/yang/Documents/devworkspace/new-api/model/midjourney.go:97
+[0m[33m[2.499ms] [34;1m[rows:0][0m SELECT * FROM "midjourneys" WHERE progress != '100%'
+[SYS] 2026/05/22 - 13:29:59 | 任务进度轮询开始 
+
+2026/05/22 13:29:59 [32m/Users/yang/Documents/devworkspace/new-api/model/task.go:299
+[0m[33m[0.963ms] [34;1m[rows:0][0m SELECT * FROM "tasks" WHERE progress != '100%' AND status NOT IN ('FAILURE','SUCCESS') AND submit_time < 1779341399 ORDER BY submit_time LIMIT 100
+
+2026/05/22 13:29:59 [32m/Users/yang/Documents/devworkspace/new-api/model/task.go:310
+[0m[33m[0.557ms] [34;1m[rows:0][0m SELECT * FROM "tasks" WHERE progress != '100%' AND status != 'FAILURE' AND status != 'SUCCESS' ORDER BY id LIMIT 1000
+[SYS] 2026/05/22 - 13:29:59 | 任务进度轮询完成 
+
+2026/05/22 13:30:13 [32m/Users/yang/Documents/devworkspace/new-api/model/db_time.go:12
+[0m[33m[3.074ms] [34;1m[rows:1][0m SELECT EXTRACT(EPOCH FROM NOW())::bigint
+
+2026/05/22 13:30:13 [32m/Users/yang/Documents/devworkspace/new-api/model/subscription.go:832
+[0m[33m[2.852ms] [34;1m[rows:0][0m SELECT * FROM "user_subscriptions" WHERE status = 'active' AND end_time > 0 AND end_time <= 1779427813 ORDER BY end_time asc, id asc LIMIT 300
+
+2026/05/22 13:30:13 [32m/Users/yang/Documents/devworkspace/new-api/model/db_time.go:12
+[0m[33m[0.351ms] [34;1m[rows:1][0m SELECT EXTRACT(EPOCH FROM NOW())::bigint
+
+2026/05/22 13:30:13 [32m/Users/yang/Documents/devworkspace/new-api/model/subscription.go:1109
+[0m[33m[0.756ms] [34;1m[rows:0][0m SELECT * FROM "user_subscriptions" WHERE next_reset_time > 0 AND next_reset_time <= 1779427813 AND status = 'active' ORDER BY next_reset_time asc LIMIT 300
+[SYS] 2026/05/22 - 13:30:13 | 正在更新数据看板数据... 
+[SYS] 2026/05/22 - 13:30:13 | 保存数据看板数据成功，共保存0条数据 
+
+2026/05/22 13:30:14 [32m/Users/yang/Documents/devworkspace/new-api/model/midjourney.go:97
+[0m[33m[2.296ms] [34;1m[rows:0][0m SELECT * FROM "midjourneys" WHERE progress != '100%'
+[SYS] 2026/05/22 - 13:30:14 | 任务进度轮询开始 
+
+2026/05/22 13:30:14 [32m/Users/yang/Documents/devworkspace/new-api/model/task.go:299
+[0m[33m[1.275ms] [34;1m[rows:0][0m SELECT * FROM "tasks" WHERE progress != '100%' AND status NOT IN ('FAILURE','SUCCESS') AND submit_time < 1779341414 ORDER BY submit_time LIMIT 100
+
+2026/05/22 13:30:14 [32m/Users/yang/Documents/devworkspace/new-api/model/task.go:310
+[0m[33m[1.049ms] [34;1m[rows:0][0m SELECT * FROM "tasks" WHERE progress != '100%' AND status != 'FAILURE' AND status != 'SUCCESS' ORDER BY id LIMIT 1000
+[SYS] 2026/05/22 - 13:30:14 | 任务进度轮询完成 
+[SYS] 2026/05/22 - 13:30:22 | syncing options from database 
+
+2026/05/22 13:30:22 [32m/Users/yang/Documents/devworkspace/new-api/model/option.go:25
+[0m[33m[1.994ms] [34;1m[rows:10][0m SELECT * FROM "options"
+[SYS] 2026/05/22 - 13:30:24 | syncing channels from database 
+
+2026/05/22 13:30:24 [32m/Users/yang/Documents/devworkspace/new-api/model/channel_cache.go:28
+[0m[33m[3.964ms] [34;1m[rows:0][0m SELECT * FROM "channels"
+
+2026/05/22 13:30:24 [32m/Users/yang/Documents/devworkspace/new-api/model/channel_cache.go:33
+[0m[33m[1.454ms] [34;1m[rows:0][0m SELECT * FROM "abilities"
+[SYS] 2026/05/22 - 13:30:24 | channels synced from database 
+[SYS] 2026/05/22 - 13:30:29 | 任务进度轮询开始 
+
+2026/05/22 13:30:29 [32m/Users/yang/Documents/devworkspace/new-api/model/midjourney.go:97
+[0m[33m[12.192ms] [34;1m[rows:0][0m SELECT * FROM "midjourneys" WHERE progress != '100%'
+
+2026/05/22 13:30:29 [32m/Users/yang/Documents/devworkspace/new-api/model/task.go:299
+[0m[33m[9.164ms] [34;1m[rows:0][0m SELECT * FROM "tasks" WHERE progress != '100%' AND status NOT IN ('FAILURE','SUCCESS') AND submit_time < 1779341429 ORDER BY submit_time LIMIT 100
+
+2026/05/22 13:30:29 [32m/Users/yang/Documents/devworkspace/new-api/model/task.go:310
+[0m[33m[1.270ms] [34;1m[rows:0][0m SELECT * FROM "tasks" WHERE progress != '100%' AND status != 'FAILURE' AND status != 'SUCCESS' ORDER BY id LIMIT 1000
+[SYS] 2026/05/22 - 13:30:29 | 任务进度轮询完成 
+[SYS] 2026/05/22 - 13:30:44 | 任务进度轮询开始 
+
+2026/05/22 13:30:44 [32m/Users/yang/Documents/devworkspace/new-api/model/midjourney.go:97
+[0m[33m[3.102ms] [34;1m[rows:0][0m SELECT * FROM "midjourneys" WHERE progress != '100%'
+
+2026/05/22 13:30:44 [32m/Users/yang/Documents/devworkspace/new-api/model/task.go:299
+[0m[33m[0.558ms] [34;1m[rows:0][0m SELECT * FROM "tasks" WHERE progress != '100%' AND status NOT IN ('FAILURE','SUCCESS') AND submit_time < 1779341444 ORDER BY submit_time LIMIT 100
+
+2026/05/22 13:30:44 [32m/Users/yang/Documents/devworkspace/new-api/model/task.go:310
+[0m[33m[3.104ms] [34;1m[rows:0][0m SELECT * FROM "tasks" WHERE progress != '100%' AND status != 'FAILURE' AND status != 'SUCCESS' ORDER BY id LIMIT 1000
+[SYS] 2026/05/22 - 13:30:44 | 任务进度轮询完成 
+
+2026/05/22 13:30:59 [32m/Users/yang/Documents/devworkspace/new-api/model/midjourney.go:97
+[0m[33m[1.957ms] [34;1m[rows:0][0m SELECT * FROM "midjourneys" WHERE progress != '100%'
+[SYS] 2026/05/22 - 13:30:59 | 任务进度轮询开始 
+
+2026/05/22 13:30:59 [32m/Users/yang/Documents/devworkspace/new-api/model/task.go:299
+[0m[33m[1.250ms] [34;1m[rows:0][0m SELECT * FROM "tasks" WHERE progress != '100%' AND status NOT IN ('FAILURE','SUCCESS') AND submit_time < 1779341459 ORDER BY submit_time LIMIT 100
+
+2026/05/22 13:30:59 [32m/Users/yang/Documents/devworkspace/new-api/model/task.go:310
+[0m[33m[0.899ms] [34;1m[rows:0][0m SELECT * FROM "tasks" WHERE progress != '100%' AND status != 'FAILURE' AND status != 'SUCCESS' ORDER BY id LIMIT 1000
+[SYS] 2026/05/22 - 13:30:59 | 任务进度轮询完成 
+
+2026/05/22 13:31:13 [32m/Users/yang/Documents/devworkspace/new-api/model/db_time.go:12
+[0m[33m[2.873ms] [34;1m[rows:1][0m SELECT EXTRACT(EPOCH FROM NOW())::bigint
+
+2026/05/22 13:31:13 [32m/Users/yang/Documents/devworkspace/new-api/model/subscription.go:832
+[0m[33m[5.396ms] [34;1m[rows:0][0m SELECT * FROM "user_subscriptions" WHERE status = 'active' AND end_time > 0 AND end_time <= 1779427873 ORDER BY end_time asc, id asc LIMIT 300
+
+2026/05/22 13:31:13 [32m/Users/yang/Documents/devworkspace/new-api/model/db_time.go:12
+[0m[33m[0.249ms] [34;1m[rows:1][0m SELECT EXTRACT(EPOCH FROM NOW())::bigint
+
+2026/05/22 13:31:13 [32m/Users/yang/Documents/devworkspace/new-api/model/subscription.go:1109
+[0m[33m[0.542ms] [34;1m[rows:0][0m SELECT * FROM "user_subscriptions" WHERE next_reset_time > 0 AND next_reset_time <= 1779427873 AND status = 'active' ORDER BY next_reset_time asc LIMIT 300
+[SYS] 2026/05/22 - 13:31:14 | 任务进度轮询开始 
+
+2026/05/22 13:31:14 [32m/Users/yang/Documents/devworkspace/new-api/model/midjourney.go:97
+[0m[33m[1.728ms] [34;1m[rows:0][0m SELECT * FROM "midjourneys" WHERE progress != '100%'
+
+2026/05/22 13:31:14 [32m/Users/yang/Documents/devworkspace/new-api/model/task.go:299
+[0m[33m[0.861ms] [34;1m[rows:0][0m SELECT * FROM "tasks" WHERE progress != '100%' AND status NOT IN ('FAILURE','SUCCESS') AND submit_time < 1779341474 ORDER BY submit_time LIMIT 100
+
+2026/05/22 13:31:14 [32m/Users/yang/Documents/devworkspace/new-api/model/task.go:310
+[0m[33m[0.391ms] [34;1m[rows:0][0m SELECT * FROM "tasks" WHERE progress != '100%' AND status != 'FAILURE' AND status != 'SUCCESS' ORDER BY id LIMIT 1000
+[SYS] 2026/05/22 - 13:31:14 | 任务进度轮询完成 
+[SYS] 2026/05/22 - 13:31:22 | syncing options from database 
+
+2026/05/22 13:31:22 [32m/Users/yang/Documents/devworkspace/new-api/model/option.go:25
+[0m[33m[3.014ms] [34;1m[rows:10][0m SELECT * FROM "options"
+[SYS] 2026/05/22 - 13:31:24 | syncing channels from database 
+
+2026/05/22 13:31:24 [32m/Users/yang/Documents/devworkspace/new-api/model/channel_cache.go:28
+[0m[33m[4.332ms] [34;1m[rows:0][0m SELECT * FROM "channels"
+
+2026/05/22 13:31:24 [32m/Users/yang/Documents/devworkspace/new-api/model/channel_cache.go:33
+[0m[33m[1.687ms] [34;1m[rows:0][0m SELECT * FROM "abilities"
+[SYS] 2026/05/22 - 13:31:24 | channels synced from database 
+[SYS] 2026/05/22 - 13:31:29 | 任务进度轮询开始 
+
+2026/05/22 13:31:29 [32m/Users/yang/Documents/devworkspace/new-api/model/midjourney.go:97
+[0m[33m[15.284ms] [34;1m[rows:0][0m SELECT * FROM "midjourneys" WHERE progress != '100%'
+
+2026/05/22 13:31:29 [32m/Users/yang/Documents/devworkspace/new-api/model/task.go:299
+[0m[33m[12.425ms] [34;1m[rows:0][0m SELECT * FROM "tasks" WHERE progress != '100%' AND status NOT IN ('FAILURE','SUCCESS') AND submit_time < 1779341489 ORDER BY submit_time LIMIT 100
+
+2026/05/22 13:31:29 [32m/Users/yang/Documents/devworkspace/new-api/model/task.go:310
+[0m[33m[0.863ms] [34;1m[rows:0][0m SELECT * FROM "tasks" WHERE progress != '100%' AND status != 'FAILURE' AND status != 'SUCCESS' ORDER BY id LIMIT 1000
+[SYS] 2026/05/22 - 13:31:29 | 任务进度轮询完成 
+[SYS] 2026/05/22 - 13:31:44 | 任务进度轮询开始 
+
+2026/05/22 13:31:44 [32m/Users/yang/Documents/devworkspace/new-api/model/midjourney.go:97
+[0m[33m[4.647ms] [34;1m[rows:0][0m SELECT * FROM "midjourneys" WHERE progress != '100%'
+
+2026/05/22 13:31:44 [32m/Users/yang/Documents/devworkspace/new-api/model/task.go:299
+[0m[33m[3.901ms] [34;1m[rows:0][0m SELECT * FROM "tasks" WHERE progress != '100%' AND status NOT IN ('FAILURE','SUCCESS') AND submit_time < 1779341504 ORDER BY submit_time LIMIT 100
+
+2026/05/22 13:31:44 [32m/Users/yang/Documents/devworkspace/new-api/model/task.go:310
+[0m[33m[0.774ms] [34;1m[rows:0][0m SELECT * FROM "tasks" WHERE progress != '100%' AND status != 'FAILURE' AND status != 'SUCCESS' ORDER BY id LIMIT 1000
+[SYS] 2026/05/22 - 13:31:44 | 任务进度轮询完成 
+
+2026/05/22 13:31:59 [32m/Users/yang/Documents/devworkspace/new-api/model/midjourney.go:97
+[0m[33m[1.677ms] [34;1m[rows:0][0m SELECT * FROM "midjourneys" WHERE progress != '100%'
+[SYS] 2026/05/22 - 13:31:59 | 任务进度轮询开始 
+
+2026/05/22 13:31:59 [32m/Users/yang/Documents/devworkspace/new-api/model/task.go:299
+[0m[33m[0.812ms] [34;1m[rows:0][0m SELECT * FROM "tasks" WHERE progress != '100%' AND status NOT IN ('FAILURE','SUCCESS') AND submit_time < 1779341519 ORDER BY submit_time LIMIT 100
+
+2026/05/22 13:31:59 [32m/Users/yang/Documents/devworkspace/new-api/model/task.go:310
+[0m[33m[0.517ms] [34;1m[rows:0][0m SELECT * FROM "tasks" WHERE progress != '100%' AND status != 'FAILURE' AND status != 'SUCCESS' ORDER BY id LIMIT 1000
+[SYS] 2026/05/22 - 13:31:59 | 任务进度轮询完成 
+
+2026/05/22 13:32:13 [32m/Users/yang/Documents/devworkspace/new-api/model/db_time.go:12
+[0m[33m[3.613ms] [34;1m[rows:1][0m SELECT EXTRACT(EPOCH FROM NOW())::bigint
+
+2026/05/22 13:32:13 [32m/Users/yang/Documents/devworkspace/new-api/model/subscription.go:832
+[0m[33m[4.148ms] [34;1m[rows:0][0m SELECT * FROM "user_subscriptions" WHERE status = 'active' AND end_time > 0 AND end_time <= 1779427933 ORDER BY end_time asc, id asc LIMIT 300
+
+2026/05/22 13:32:13 [32m/Users/yang/Documents/devworkspace/new-api/model/db_time.go:12
+[0m[33m[0.360ms] [34;1m[rows:1][0m SELECT EXTRACT(EPOCH FROM NOW())::bigint
+
+2026/05/22 13:32:13 [32m/Users/yang/Documents/devworkspace/new-api/model/subscription.go:1109
+[0m[33m[1.138ms] [34;1m[rows:0][0m SELECT * FROM "user_subscriptions" WHERE next_reset_time > 0 AND next_reset_time <= 1779427933 AND status = 'active' ORDER BY next_reset_time asc LIMIT 300
+
+2026/05/22 13:32:13 [32m/Users/yang/Documents/devworkspace/new-api/model/db_time.go:12
+[0m[33m[0.183ms] [34;1m[rows:1][0m SELECT EXTRACT(EPOCH FROM NOW())::bigint
+
+2026/05/22 13:32:13 [32m/Users/yang/Documents/devworkspace/new-api/model/subscription.go:1148
+[0m[33m[1.622ms] [34;1m[rows:0][0m DELETE FROM "subscription_pre_consume_records" WHERE updated_at < 1778823133
+[SYS] 2026/05/22 - 13:32:14 | 任务进度轮询开始 
+
+2026/05/22 13:32:14 [32m/Users/yang/Documents/devworkspace/new-api/model/midjourney.go:97
+[0m[33m[1.157ms] [34;1m[rows:0][0m SELECT * FROM "midjourneys" WHERE progress != '100%'
+
+2026/05/22 13:32:14 [32m/Users/yang/Documents/devworkspace/new-api/model/task.go:299
+[0m[33m[0.740ms] [34;1m[rows:0][0m SELECT * FROM "tasks" WHERE progress != '100%' AND status NOT IN ('FAILURE','SUCCESS') AND submit_time < 1779341534 ORDER BY submit_time LIMIT 100
+
+2026/05/22 13:32:14 [32m/Users/yang/Documents/devworkspace/new-api/model/task.go:310
+[0m[33m[0.362ms] [34;1m[rows:0][0m SELECT * FROM "tasks" WHERE progress != '100%' AND status != 'FAILURE' AND status != 'SUCCESS' ORDER BY id LIMIT 1000
+[SYS] 2026/05/22 - 13:32:14 | 任务进度轮询完成 
+[SYS] 2026/05/22 - 13:32:22 | syncing options from database 
+
+2026/05/22 13:32:22 [32m/Users/yang/Documents/devworkspace/new-api/model/option.go:25
+[0m[33m[7.992ms] [34;1m[rows:10][0m SELECT * FROM "options"
+[SYS] 2026/05/22 - 13:32:24 | syncing channels from database 
+
+2026/05/22 13:32:24 [32m/Users/yang/Documents/devworkspace/new-api/model/channel_cache.go:28
+[0m[33m[3.409ms] [34;1m[rows:0][0m SELECT * FROM "channels"
+
+2026/05/22 13:32:24 [32m/Users/yang/Documents/devworkspace/new-api/model/channel_cache.go:33
+[0m[33m[1.863ms] [34;1m[rows:0][0m SELECT * FROM "abilities"
+[SYS] 2026/05/22 - 13:32:24 | channels synced from database 
+[SYS] 2026/05/22 - 13:32:29 | 任务进度轮询开始 
+
+2026/05/22 13:32:29 [32m/Users/yang/Documents/devworkspace/new-api/model/midjourney.go:97
+[0m[33m[8.963ms] [34;1m[rows:0][0m SELECT * FROM "midjourneys" WHERE progress != '100%'
+
+2026/05/22 13:32:29 [32m/Users/yang/Documents/devworkspace/new-api/model/task.go:299
+[0m[33m[8.099ms] [34;1m[rows:0][0m SELECT * FROM "tasks" WHERE progress != '100%' AND status NOT IN ('FAILURE','SUCCESS') AND submit_time < 1779341549 ORDER BY submit_time LIMIT 100
+
+2026/05/22 13:32:29 [32m/Users/yang/Documents/devworkspace/new-api/model/task.go:310
+[0m[33m[0.789ms] [34;1m[rows:0][0m SELECT * FROM "tasks" WHERE progress != '100%' AND status != 'FAILURE' AND status != 'SUCCESS' ORDER BY id LIMIT 1000
+[SYS] 2026/05/22 - 13:32:29 | 任务进度轮询完成 
+[SYS] 2026/05/22 - 13:32:44 | 任务进度轮询开始 
+
+2026/05/22 13:32:44 [32m/Users/yang/Documents/devworkspace/new-api/model/midjourney.go:97
+[0m[33m[2.463ms] [34;1m[rows:0][0m SELECT * FROM "midjourneys" WHERE progress != '100%'
+
+2026/05/22 13:32:44 [32m/Users/yang/Documents/devworkspace/new-api/model/task.go:299
+[0m[33m[0.555ms] [34;1m[rows:0][0m SELECT * FROM "tasks" WHERE progress != '100%' AND status NOT IN ('FAILURE','SUCCESS') AND submit_time < 1779341564 ORDER BY submit_time LIMIT 100
+
+2026/05/22 13:32:44 [32m/Users/yang/Documents/devworkspace/new-api/model/task.go:310
+[0m[33m[0.393ms] [34;1m[rows:0][0m SELECT * FROM "tasks" WHERE progress != '100%' AND status != 'FAILURE' AND status != 'SUCCESS' ORDER BY id LIMIT 1000
+[SYS] 2026/05/22 - 13:32:44 | 任务进度轮询完成 
+[SYS] 2026/05/22 - 13:32:59 | 任务进度轮询开始 
+
+2026/05/22 13:32:59 [32m/Users/yang/Documents/devworkspace/new-api/model/midjourney.go:97
+[0m[33m[2.871ms] [34;1m[rows:0][0m SELECT * FROM "midjourneys" WHERE progress != '100%'
+
+2026/05/22 13:32:59 [32m/Users/yang/Documents/devworkspace/new-api/model/task.go:299
+[0m[33m[0.784ms] [34;1m[rows:0][0m SELECT * FROM "tasks" WHERE progress != '100%' AND status NOT IN ('FAILURE','SUCCESS') AND submit_time < 1779341579 ORDER BY submit_time LIMIT 100
+
+2026/05/22 13:32:59 [32m/Users/yang/Documents/devworkspace/new-api/model/task.go:310
+[0m[33m[0.637ms] [34;1m[rows:0][0m SELECT * FROM "tasks" WHERE progress != '100%' AND status != 'FAILURE' AND status != 'SUCCESS' ORDER BY id LIMIT 1000
+[SYS] 2026/05/22 - 13:32:59 | 任务进度轮询完成 
+
+2026/05/22 13:33:13 [32m/Users/yang/Documents/devworkspace/new-api/model/db_time.go:12
+[0m[33m[2.326ms] [34;1m[rows:1][0m SELECT EXTRACT(EPOCH FROM NOW())::bigint
+
+2026/05/22 13:33:13 [32m/Users/yang/Documents/devworkspace/new-api/model/subscription.go:832
+[0m[33m[1.919ms] [34;1m[rows:0][0m SELECT * FROM "user_subscriptions" WHERE status = 'active' AND end_time > 0 AND end_time <= 1779427993 ORDER BY end_time asc, id asc LIMIT 300
+
+2026/05/22 13:33:13 [32m/Users/yang/Documents/devworkspace/new-api/model/db_time.go:12
+[0m[33m[0.266ms] [34;1m[rows:1][0m SELECT EXTRACT(EPOCH FROM NOW())::bigint
+
+2026/05/22 13:33:13 [32m/Users/yang/Documents/devworkspace/new-api/model/subscription.go:1109
+[0m[33m[0.737ms] [34;1m[rows:0][0m SELECT * FROM "user_subscriptions" WHERE next_reset_time > 0 AND next_reset_time <= 1779427993 AND status = 'active' ORDER BY next_reset_time asc LIMIT 300
+[SYS] 2026/05/22 - 13:33:14 | 任务进度轮询开始 
+
+2026/05/22 13:33:14 [32m/Users/yang/Documents/devworkspace/new-api/model/midjourney.go:97
+[0m[33m[1.123ms] [34;1m[rows:0][0m SELECT * FROM "midjourneys" WHERE progress != '100%'
+
+2026/05/22 13:33:14 [32m/Users/yang/Documents/devworkspace/new-api/model/task.go:299
+[0m[33m[4.167ms] [34;1m[rows:0][0m SELECT * FROM "tasks" WHERE progress != '100%' AND status NOT IN ('FAILURE','SUCCESS') AND submit_time < 1779341594 ORDER BY submit_time LIMIT 100
+
+2026/05/22 13:33:14 [32m/Users/yang/Documents/devworkspace/new-api/model/task.go:310
+[0m[33m[0.671ms] [34;1m[rows:0][0m SELECT * FROM "tasks" WHERE progress != '100%' AND status != 'FAILURE' AND status != 'SUCCESS' ORDER BY id LIMIT 1000
+[SYS] 2026/05/22 - 13:33:14 | 任务进度轮询完成 
+[SYS] 2026/05/22 - 13:33:22 | syncing options from database 
+
+2026/05/22 13:33:22 [32m/Users/yang/Documents/devworkspace/new-api/model/option.go:25
+[0m[33m[2.958ms] [34;1m[rows:10][0m SELECT * FROM "options"
+[SYS] 2026/05/22 - 13:33:24 | syncing channels from database 
+
+2026/05/22 13:33:24 [32m/Users/yang/Documents/devworkspace/new-api/model/channel_cache.go:28
+[0m[33m[3.936ms] [34;1m[rows:0][0m SELECT * FROM "channels"
+
+2026/05/22 13:33:24 [32m/Users/yang/Documents/devworkspace/new-api/model/channel_cache.go:33
+[0m[33m[1.669ms] [34;1m[rows:0][0m SELECT * FROM "abilities"
+[SYS] 2026/05/22 - 13:33:24 | channels synced from database 
+[SYS] 2026/05/22 - 13:33:29 | 任务进度轮询开始 
+
+2026/05/22 13:33:29 [32m/Users/yang/Documents/devworkspace/new-api/model/midjourney.go:97
+[0m[33m[19.039ms] [34;1m[rows:0][0m SELECT * FROM "midjourneys" WHERE progress != '100%'
+
+2026/05/22 13:33:29 [32m/Users/yang/Documents/devworkspace/new-api/model/task.go:299
+[0m[33m[16.021ms] [34;1m[rows:0][0m SELECT * FROM "tasks" WHERE progress != '100%' AND status NOT IN ('FAILURE','SUCCESS') AND submit_time < 1779341609 ORDER BY submit_time LIMIT 100
+
+2026/05/22 13:33:29 [32m/Users/yang/Documents/devworkspace/new-api/model/task.go:310
+[0m[33m[1.346ms] [34;1m[rows:0][0m SELECT * FROM "tasks" WHERE progress != '100%' AND status != 'FAILURE' AND status != 'SUCCESS' ORDER BY id LIMIT 1000
+[SYS] 2026/05/22 - 13:33:29 | 任务进度轮询完成 

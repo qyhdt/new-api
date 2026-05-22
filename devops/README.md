@@ -104,6 +104,19 @@ ls -la /home/work/data/log /home/work/data/log/edge-nginx
 
 ---
 
+## 本地库同步到远端（覆盖）
+
+```bash
+cd devops/deployment/sync-db
+./01-dump-local.sh              # 步骤1：导出本地 PG + Redis
+./02-restore-remote.sh          # 步骤2：上传并覆盖远端（会确认）
+# 或一键：./sync-db-to-remote.sh
+```
+
+详见 [deployment/sync-db/README.md](deployment/sync-db/README.md)。
+
+---
+
 ## 配置文件
 
 | 文件 | 说明 |
