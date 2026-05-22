@@ -1,0 +1,14 @@
+# 运行时复制到 /home/work/data/runtime/edge-proxy/upstreams.conf
+# 勿用 upstream { server new-api:3000; } 静态块——容器未就绪时 nginx 会 [emerg] 起不来。
+# 使用变量 + resolver 127.0.0.11 在请求时再解析（与 thyseed-platform 一致）。
+
+# 单实例（默认）
+map "" $new_api_upstream_host {
+    default new-api;
+}
+
+# 未来双实例扩缩容示例（取消注释并改 nginx 中 proxy_pass 端口）：
+# split_clients "${binary_remote_addr}${request_uri}" $new_api_upstream_host {
+#     50%     new-api;
+#     *       new-api-2;
+# }

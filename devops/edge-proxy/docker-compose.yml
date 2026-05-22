@@ -1,0 +1,30 @@
+# 生产入口：edge-nginx 独占宿主机 80/443，反代到 new-api:3000（Docker 网络 new_api_edge_net）
+#
+# 用法（在仓库 devops/edge-proxy 目录）：
+#   docker network create new_api_edge_net   # 首次
+#   docker compose up -d
+#
+# 须与 deployment/docker-compose.app.yml 同网；new-api 不再映射公网 3000。
+
+services:
+  edge-nginx:
+    image: nginx:alpine
+    container_name: edge-nginx
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx-main.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
+      - ./proxy_params.inc:/etc/nginx/conf.d/proxy_params.inc:ro
+      - ${EDGE_RUNTIME_DIR:-/home/work/data/runtime/edge-proxy}:/etc/nginx/runtime:ro
+      - ${DATA_ROOT:-/home/work/data}/log/edge-nginx:/var/log/nginx
+      - ../cert:/etc/nginx/certs/thyseed:ro
+    networks:
+      - new_api_edge_net
+
+networks:
+  new_api_edge_net:
+    external: true
+    name: new_api_edge_net

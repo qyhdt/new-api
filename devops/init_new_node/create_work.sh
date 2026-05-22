@@ -54,7 +54,8 @@ echo "User ${USER_NAME} initialized (sudo: passwordless / NOPASSWD)."
 # -----------------------------------------------------------------------------
 DATA_ROOT="${HOME_DIR}/data"
 
-mkdir -p "${DATA_ROOT}/postgres" "${DATA_ROOT}/redis" "${DATA_ROOT}/log" "${DATA_ROOT}/app-data"
+mkdir -p "${DATA_ROOT}/postgres" "${DATA_ROOT}/redis" "${DATA_ROOT}/log" "${DATA_ROOT}/app-data" \
+    "${DATA_ROOT}/log/edge-nginx" "${DATA_ROOT}/runtime/edge-proxy"
 chown -R "${USER_NAME}:${GROUP_NAME}" "${DATA_ROOT}"
 chmod -R 0775 "${DATA_ROOT}"
 

@@ -16,8 +16,9 @@ services:
     container_name: new-api
     restart: unless-stopped
     command: --log-dir /app/logs
-    ports:
-      - "${NEW_API_PORT:-3000}:3000"
+    # 公网入口由 edge-nginx :443 提供；仅 Docker 网络内访问
+    expose:
+      - "3000"
     volumes:
       - ${DATA_ROOT:-/home/work/data}/app-data:/data
       - ${DATA_ROOT:-/home/work/data}/log:/app/logs
@@ -31,9 +32,11 @@ services:
       SYNC_FREQUENCY: "60"
       MEMORY_CACHE_ENABLED: "true"
       NODE_NAME: ${NODE_NAME:-new-api-prod-1}
+      FRONTEND_BASE_URL: ${FRONTEND_BASE_URL:-}
     networks:
       - new_api_app_net
       - new_api_infra_net
+      - new_api_edge_net
     healthcheck:
       test: ["CMD-SHELL", "wget -q -O - http://localhost:3000/api/status | grep -o '\"success\":\\s*true' || exit 1"]
       interval: 30s
@@ -45,4 +48,7 @@ networks:
     driver: bridge
   new_api_infra_net:
     name: new_api_infra_net
+    external: true
+  new_api_edge_net:
+    name: new_api_edge_net
     external: true
