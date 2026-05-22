@@ -202,17 +202,18 @@ log "→ new-api 最近 40 行（docker logs）"
 docker logs --tail 40 new-api 2>&1 || true
 
 EDGE_DOMAIN="$(grep -E '^EDGE_DOMAIN=' "${ENV_FILE}" | cut -d= -f2- || echo aiapi.thyseed.com)"
+EDGE_DOMAIN_ALT="$(grep -E '^EDGE_DOMAIN_ALT=' "${ENV_FILE}" | cut -d= -f2- || echo aicenter.thyseed.com)"
 
 echo
 echo "═══════════════════════════════════════════════════════════════"
 ok "部署完成"
-echo "  公网入口： https://${EDGE_DOMAIN}  （edge-nginx :443）"
+echo "  公网入口： https://${EDGE_DOMAIN}  https://${EDGE_DOMAIN_ALT}  （edge-nginx :443）"
 echo "  后端容器： new-api:3000（仅 Docker 网络，不映射公网端口）"
 echo "  应用日志： ${DATA_ROOT}/log"
 echo "  Edge 日志：${DATA_ROOT}/log/edge-nginx/"
 echo "  PG 数据：  ${DATA_ROOT}/postgres"
 echo "  Redis：    ${DATA_ROOT}/redis"
-echo "  DNS：      ${EDGE_DOMAIN} A 记录 → 本机公网 IP；安全组放行 80/443"
+echo "  DNS：      ${EDGE_DOMAIN}、${EDGE_DOMAIN_ALT} A 记录 → 本机公网 IP；安全组放行 80/443"
 echo "═══════════════════════════════════════════════════════════════"
 echo "常用："
 echo "  tail -f ${DATA_ROOT}/log/*.log"

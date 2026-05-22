@@ -11,7 +11,7 @@
 └── runtime/edge-proxy/upstreams.conf
 ```
 
-公网入口：**edge-nginx** `80/443` → `https://aiapi.thyseed.com` → 容器 **new-api:3000**（前后端同源，不再暴露宿主机 3000）。
+公网入口：**edge-nginx** `80/443` → `https://aiapi.thyseed.com` / `https://aicenter.thyseed.com` → 容器 **new-api:3000**（前后端同源，不再暴露宿主机 3000）。
 
 详见 [edge-proxy/README.md](edge-proxy/README.md)。
 
@@ -34,7 +34,7 @@ chmod +x devops/one_click_deploy.sh devops/init_new_node/*.sh devops/deployment/
 
 **GitHub 私库**：把 `devops/init_new_node/keys/43.155.195.115/work_id_rsa.pub` 加到 GitHub SSH Keys，否则远端 `git clone` 会失败。
 
-完成后访问：**https://aiapi.thyseed.com**（edge-nginx :443；需 DNS 与证书 `devops/cert`）
+完成后访问：**https://aiapi.thyseed.com** 或 **https://aicenter.thyseed.com**（edge-nginx :443；DNS A 记录 + 证书 `devops/cert` 泛域名 `*.thyseed.com`）
 
 直连调试（仅 Docker 内网）：`docker exec edge-nginx wget -qO- http://new-api:3000/api/status`
 

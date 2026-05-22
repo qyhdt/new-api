@@ -1,4 +1,4 @@
-# new-api Edge Nginx（`aiapi.thyseed.com`）
+# new-api Edge Nginx（`aiapi.thyseed.com`、`aicenter.thyseed.com`）
 
 生产机 **独占 80/443** 的入口容器 **`edge-nginx`**，通过 Docker 网络 **`new_api_edge_net`** 反代到 **`new-api:3000`**。
 
@@ -70,5 +70,5 @@ docker exec edge-nginx nginx -t && docker exec edge-nginx nginx -s reload
 
 ## DNS / 防火墙
 
-- **A 记录**：`aiapi.thyseed.com` → 服务器公网 IP（如 `43.155.195.115`）
+- **A 记录**：`aiapi.thyseed.com`、`aicenter.thyseed.com` → 服务器公网 IP（如 `43.155.195.115`）
 - **安全组**：放行 **80、443**（可关闭公网 **3000**）

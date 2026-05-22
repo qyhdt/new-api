@@ -26,6 +26,7 @@ REMOTE_REPO_PATH="${REMOTE_REPO_PATH:-/home/work/new-api}"
 GIT_BRANCH="${GIT_BRANCH:-main}"
 GIT_REMOTE_URL="${GIT_REMOTE_URL:-git@github.com:qyhdt/new-api.git}"
 EDGE_DOMAIN="${EDGE_DOMAIN:-aiapi.thyseed.com}"
+EDGE_DOMAIN_ALT="${EDGE_DOMAIN_ALT:-aicenter.thyseed.com}"
 
 REMOTE="${REMOTE_USER}@${REMOTE_HOST}"
 SSH_OPTS=(-o StrictHostKeyChecking=accept-new -o ConnectTimeout=20 -o ServerAliveInterval=30)
@@ -74,7 +75,7 @@ echo "  new-api 远程部署（本机 → 远端）"
 echo "  目标：    ${REMOTE}"
 echo "  仓库：    ${GIT_REMOTE_URL} @ ${GIT_BRANCH}"
 echo "  远端路径：${REMOTE_REPO_PATH}"
-echo "  访问：    https://${EDGE_DOMAIN}"
+echo "  访问：    https://${EDGE_DOMAIN}  https://${EDGE_DOMAIN_ALT}"
 echo "═══════════════════════════════════════════════════════════════"
 
 log "[1/4] 测试 SSH..."
@@ -90,15 +91,14 @@ ok "已更新 /tmp/deploy-online.sh"
 
 log "[3/4] 远端执行部署（日志如下）..."
 echo "───────────────────────────────────────────────────────────────"
+REMOTE_SHELL="REPO_URL=$(printf '%q' "${GIT_REMOTE_URL}") REPO_BRANCH=$(printf '%q' "${GIT_BRANCH}") REPO_DIR=$(printf '%q' "${REMOTE_REPO_PATH}") DATA_ROOT=/home/work/data bash /tmp/deploy-online.sh"
+if ((${#REMOTE_ARGS[@]} > 0)); then
+    for _a in "${REMOTE_ARGS[@]}"; do
+        REMOTE_SHELL+=" $(printf '%q' "${_a}")"
+    done
+fi
 set +e
-ssh "${SSH_OPTS[@]}" -t "${REMOTE}" bash -s -- "${REMOTE_ARGS[@]}" <<REMOTE_EOF
-set -euo pipefail
-export REPO_URL='${GIT_REMOTE_URL}'
-export REPO_BRANCH='${GIT_BRANCH}'
-export REPO_DIR='${REMOTE_REPO_PATH}'
-export DATA_ROOT='/home/work/data'
-bash /tmp/deploy-online.sh "\$@"
-REMOTE_EOF
+ssh "${SSH_OPTS[@]}" -t "${REMOTE}" "${REMOTE_SHELL}"
 REMOTE_STATUS=$?
 set -e
 echo "───────────────────────────────────────────────────────────────"
@@ -120,7 +120,7 @@ STATUS_EOF
 echo
 echo "═══════════════════════════════════════════════════════════════"
 ok "远程部署完成"
-echo "  访问：     https://${EDGE_DOMAIN}"
+echo "  访问：     https://${EDGE_DOMAIN}  https://${EDGE_DOMAIN_ALT}"
 echo "  应用日志： ssh ${REMOTE} 'ls -la /home/work/data/log'"
 echo "  Edge 日志：ssh ${REMOTE} 'tail -f /home/work/data/log/edge-nginx/proxy.log'"
 echo "  跟踪应用： ssh ${REMOTE} 'docker logs -f new-api'"
