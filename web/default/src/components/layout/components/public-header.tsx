@@ -42,6 +42,7 @@ import { ThemeSwitch } from '@/components/theme-switch'
 import { defaultTopNavLinks } from '../config/top-nav.config'
 import type { TopNavLink } from '../types'
 import { HeaderLogo } from './header-logo'
+import { ThyseedBrandMark } from './thyseed-brand-mark'
 
 const AUTH_PROMPT_SECONDS = 5
 
@@ -199,8 +200,9 @@ export function PublicHeader(props: PublicHeaderProps) {
             {/* Logo */}
             <Link
               to={homeUrl}
-              className='group flex shrink-0 items-center gap-2.5'
+              className='group flex shrink-0 items-center gap-2'
             >
+              <ThyseedBrandMark imgClassName='h-[1.125rem] sm:h-5' />
               <div className='flex size-7 shrink-0 items-center justify-center transition-all duration-300 group-hover:scale-105'>
                 {loading ? (
                   <Skeleton className='size-full rounded-lg' />

@@ -1,0 +1,57 @@
+# new-api 基础设施：PostgreSQL + Redis（数据目录在 host 上持久化）
+#
+# 远端用法：
+#   docker compose -f docker-compose.infra.yml --env-file .env up -d
+#
+# 数据目录：${DATA_ROOT}/postgres、${DATA_ROOT}/redis
+
+name: new-api-infra
+
+services:
+  postgres:
+    image: postgres:15-alpine
+    container_name: new-api-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-root}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?set POSTGRES_PASSWORD in .env}
+      POSTGRES_DB: ${POSTGRES_DB:-new-api}
+      TZ: Asia/Shanghai
+    ports:
+      - "127.0.0.1:5432:5432"
+    volumes:
+      - ${DATA_ROOT:-/home/work/data}/postgres:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-root} -d ${POSTGRES_DB:-new-api}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - new_api_infra_net
+
+  redis:
+    image: redis:7-alpine
+    container_name: new-api-redis
+    restart: unless-stopped
+    command:
+      - redis-server
+      - --appendonly
+      - "yes"
+      - --requirepass
+      - "${REDIS_PASSWORD:?set REDIS_PASSWORD in .env}"
+    ports:
+      - "127.0.0.1:6379:6379"
+    volumes:
+      - ${DATA_ROOT:-/home/work/data}/redis:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "-a", "${REDIS_PASSWORD}", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - new_api_infra_net
+
+networks:
+  new_api_infra_net:
+    name: new_api_infra_net
+    driver: bridge

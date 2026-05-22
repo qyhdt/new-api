@@ -16,18 +16,32 @@ along with this program. If not, see <https://www.gnu.org/licenses/>.
 
 For commercial licensing, please contact support@quantumnous.com
 */
+import { THYSEED_LOGO } from '@/lib/constants'
+import { cn } from '@/lib/utils'
+
+type ThyseedBrandMarkProps = {
+  className?: string
+  imgClassName?: string
+}
+
 /**
- * Application-wide constants
+ * 世喜 / thyseed 品牌标识
+ * 源图为白字黑底；浅色主题 invert 为黑字并融入浅底，深色主题保持原样。
  */
-
-// System Configuration Defaults
-export const DEFAULT_SYSTEM_NAME = 'New API'
-export const DEFAULT_LOGO = '/logo.png'
-export const THYSEED_LOGO = '/thyseed-logo.png'
-
-// LocalStorage Keys
-export const STORAGE_KEYS = {
-  SYSTEM_NAME: 'system_name',
-  LOGO: 'logo',
-  FOOTER_HTML: 'footer_html',
-} as const
+export function ThyseedBrandMark({
+  className,
+  imgClassName,
+}: ThyseedBrandMarkProps) {
+  return (
+    <img
+      src={THYSEED_LOGO}
+      alt='世喜'
+      className={cn(
+        'h-4 w-auto max-w-[6.25rem] shrink-0 object-contain object-left',
+        'invert dark:invert-0',
+        imgClassName,
+        className
+      )}
+    />
+  )
+}

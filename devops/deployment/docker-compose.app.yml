@@ -1,0 +1,48 @@
+# new-api 应用层（连接 new_api_infra_net 中的 postgres / redis）
+#
+# 远端用法：
+#   docker compose -f docker-compose.infra.yml --env-file .env up -d
+#   docker compose -f docker-compose.app.yml --env-file .env build
+#   docker compose -f docker-compose.app.yml --env-file .env up -d
+
+name: new-api-app
+
+services:
+  new-api:
+    build:
+      context: ../..
+      dockerfile: Dockerfile
+    image: new-api:local
+    container_name: new-api
+    restart: unless-stopped
+    command: --log-dir /app/logs
+    ports:
+      - "${NEW_API_PORT:-3000}:3000"
+    volumes:
+      - ${DATA_ROOT:-/home/work/data}/app-data:/data
+      - ${DATA_ROOT:-/home/work/data}/log:/app/logs
+    environment:
+      SQL_DSN: postgresql://${POSTGRES_USER:-root}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB:-new-api}
+      REDIS_CONN_STRING: redis://:${REDIS_PASSWORD}@redis:6379/0
+      SESSION_SECRET: ${SESSION_SECRET:?set SESSION_SECRET in .env}
+      TZ: Asia/Shanghai
+      ERROR_LOG_ENABLED: "true"
+      BATCH_UPDATE_ENABLED: "true"
+      SYNC_FREQUENCY: "60"
+      MEMORY_CACHE_ENABLED: "true"
+      NODE_NAME: ${NODE_NAME:-new-api-prod-1}
+    networks:
+      - new_api_app_net
+      - new_api_infra_net
+    healthcheck:
+      test: ["CMD-SHELL", "wget -q -O - http://localhost:3000/api/status | grep -o '\"success\":\\s*true' || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+networks:
+  new_api_app_net:
+    driver: bridge
+  new_api_infra_net:
+    name: new_api_infra_net
+    external: true

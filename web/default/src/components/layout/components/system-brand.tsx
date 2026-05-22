@@ -26,6 +26,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from '@/components/ui/sidebar'
+import { ThyseedBrandMark } from './thyseed-brand-mark'
 
 type SystemBrandProps = {
   defaultName?: string
@@ -64,6 +65,7 @@ export function SystemBrand(props: SystemBrandProps) {
           'hover:bg-accent focus-visible:ring-ring/40 focus-visible:ring-2'
         )}
       >
+        <ThyseedBrandMark imgClassName='h-3.5' />
         <div className='flex size-5 items-center justify-center overflow-hidden rounded-md'>
           <img
             src={logo}
@@ -84,6 +86,7 @@ export function SystemBrand(props: SystemBrandProps) {
           className='hover:text-sidebar-foreground active:text-sidebar-foreground cursor-default hover:bg-transparent active:bg-transparent'
           render={<div />}
         >
+          <ThyseedBrandMark imgClassName='h-4' />
           <div className='flex aspect-square size-8 items-center justify-center overflow-hidden rounded-lg'>
             <img
               src={logo}
