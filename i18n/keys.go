@@ -293,6 +293,11 @@ const (
 	MsgOAuthTokenFailed     = "oauth.token_failed"
 	MsgOAuthUserInfoEmpty   = "oauth.user_info_empty"
 	MsgOAuthTrustLevelLow   = "oauth.trust_level_low"
+
+	MsgThyseedSsoNotEnabled        = "thyseed_sso.not_enabled"
+	MsgThyseedSsoMissingToken      = "thyseed_sso.missing_token"
+	MsgThyseedSsoInvalidToken      = "thyseed_sso.invalid_token"
+	MsgThyseedSsoInvalidUsername = "thyseed_sso.invalid_username"
 )
 
 // Model layer error messages (for translation in controller)

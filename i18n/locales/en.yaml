@@ -248,6 +248,12 @@ oauth.token_failed: "Failed to get token from {{.Provider}}, please check settin
 oauth.user_info_empty: "{{.Provider}} returned empty user info, please check settings"
 oauth.trust_level_low: "Linux DO trust level does not meet the minimum required by administrator"
 
+# Thyseed portal SSO
+thyseed_sso.not_enabled: "Thyseed portal SSO login is not enabled"
+thyseed_sso.missing_token: "Missing SSO access token"
+thyseed_sso.invalid_token: "Invalid or expired SSO token"
+thyseed_sso.invalid_username: "Invalid SSO username"
+
 # Model layer error messages
 redeem.failed: "Redemption failed, please try again later"
 user.create_default_token_error: "Failed to create default token"

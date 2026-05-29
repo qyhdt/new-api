@@ -127,6 +127,9 @@ export interface SystemStatus {
     oauth_register_enabled?: boolean
     register_enabled?: boolean
     password_register_enabled?: boolean
+    thyseed_sso_enabled?: boolean
+    thyseed_sso_portal_url?: string
+    thyseed_sso_api_origin?: string
     custom_oauth_providers?: CustomOAuthProviderInfo[]
     [key: string]: unknown
   }
@@ -169,6 +172,9 @@ export interface SystemStatus {
   oauth_register_enabled?: boolean
   register_enabled?: boolean
   password_register_enabled?: boolean
+  thyseed_sso_enabled?: boolean
+  thyseed_sso_portal_url?: string
+  thyseed_sso_api_origin?: string
   custom_oauth_providers?: CustomOAuthProviderInfo[]
   [key: string]: unknown
 }

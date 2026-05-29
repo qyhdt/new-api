@@ -89,6 +89,9 @@ func GetStatus(c *gin.Context) {
 		"self_use_mode_enabled":         operation_setting.SelfUseModeEnabled,
 		"register_enabled":              common.RegisterEnabled,
 		"password_register_enabled":     common.PasswordRegisterEnabled,
+		"thyseed_sso_enabled":           common.ThyseedSsoEnabled,
+		"thyseed_sso_portal_url":        common.ThyseedSsoPortalURL,
+		"thyseed_sso_api_origin":        common.ThyseedSsoApiOrigin,
 		"default_use_auto_group":        setting.DefaultUseAutoGroup,
 
 		"usd_exchange_rate": operation_setting.USDExchangeRate,

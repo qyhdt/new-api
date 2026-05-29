@@ -125,6 +125,22 @@ func InitEnv() {
 	SearchRateLimitEnable = GetEnvOrDefaultBool("SEARCH_RATE_LIMIT_ENABLE", true)
 	SearchRateLimitNum = GetEnvOrDefault("SEARCH_RATE_LIMIT", 10)
 	SearchRateLimitDuration = int64(GetEnvOrDefault("SEARCH_RATE_LIMIT_DURATION", 60))
+
+	ThyseedSsoEnabled = GetEnvOrDefaultBool("THYSEED_SSO_ENABLED", false)
+	ThyseedJwtSecret = os.Getenv("JWT_SECRET")
+	ThyseedSsoPortalURL = GetEnvOrDefaultString("THYSEED_SSO_PORTAL_URL", "https://portal.thyseed.com")
+	ThyseedSsoApiOrigin = GetEnvOrDefaultString("THYSEED_SSO_API_ORIGIN", "https://portalapi.thyseed.com")
+	ThyseedSsoAutoRegister = GetEnvOrDefaultBool("THYSEED_SSO_AUTO_REGISTER", true)
+	ThyseedSsoDefaultRole = GetEnvOrDefault("THYSEED_SSO_DEFAULT_ROLE", RoleCommonUser)
+	if ThyseedSsoEnabled && ThyseedJwtSecret == "" {
+		SysLog("THYSEED_SSO_ENABLED is true but JWT_SECRET is empty; Thyseed SSO login is disabled")
+		ThyseedSsoEnabled = false
+	}
+	if ThyseedSsoEnabled && !IsValidateRole(ThyseedSsoDefaultRole) {
+		SysLog(fmt.Sprintf("invalid THYSEED_SSO_DEFAULT_ROLE=%d, using common user role", ThyseedSsoDefaultRole))
+		ThyseedSsoDefaultRole = RoleCommonUser
+	}
+
 	initConstantEnv()
 }
 

@@ -26,7 +26,9 @@ import {
 } from '@/assets/brand-icons'
 import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
+import { LogIn } from 'lucide-react'
 import { useOAuthLogin } from '../hooks/use-oauth-login'
+import { useThyseedPortalLoginUrl } from '../hooks/use-thyseed-sso'
 import type { SystemStatus } from '../types'
 
 type OAuthProvidersProps = {
@@ -64,8 +66,20 @@ export function OAuthProviders({
     handleTelegramLogin,
     handleCustomOAuthLogin,
   } = useOAuthLogin(status)
+  const thyseedPortalLoginUrl = useThyseedPortalLoginUrl()
 
   const providerButtons: ProviderButton[] = []
+
+  if (thyseedPortalLoginUrl) {
+    providerButtons.push({
+      key: 'thyseed-portal',
+      label: t('Continue with Thyseed Portal'),
+      onClick: () => {
+        window.location.href = thyseedPortalLoginUrl
+      },
+      icon: <LogIn className='h-4 w-4' />,
+    })
+  }
 
   if (status?.wechat_login && onWeChatLogin) {
     providerButtons.push({

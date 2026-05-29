@@ -33,6 +33,12 @@ services:
       MEMORY_CACHE_ENABLED: "true"
       NODE_NAME: ${NODE_NAME:-new-api-prod-1}
       FRONTEND_BASE_URL: ${FRONTEND_BASE_URL:-}
+      THYSEED_SSO_ENABLED: ${THYSEED_SSO_ENABLED:-false}
+      JWT_SECRET: ${JWT_SECRET:-}
+      THYSEED_SSO_PORTAL_URL: ${THYSEED_SSO_PORTAL_URL:-https://portal.thyseed.com}
+      THYSEED_SSO_API_ORIGIN: ${THYSEED_SSO_API_ORIGIN:-https://portalapi.thyseed.com}
+      THYSEED_SSO_AUTO_REGISTER: ${THYSEED_SSO_AUTO_REGISTER:-true}
+      THYSEED_SSO_DEFAULT_ROLE: ${THYSEED_SSO_DEFAULT_ROLE:-1}
     networks:
       - new_api_app_net
       - new_api_infra_net

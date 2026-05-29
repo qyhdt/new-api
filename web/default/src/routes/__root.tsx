@@ -33,6 +33,7 @@ import { GeneralError } from '@/features/errors/general-error'
 import { NotFoundError } from '@/features/errors/not-found-error'
 import { getSetupStatus } from '@/features/setup/api'
 import { saveAffiliateCode } from '@/features/auth/lib/storage'
+import { ThyseedSsoBootstrap } from '@/features/auth/components/thyseed-sso-bootstrap'
 
 function RootComponent() {
   // Load system configuration (logo, system name, etc.) from backend
@@ -47,6 +48,7 @@ function RootComponent() {
 
   return (
     <ThemeCustomizationProvider>
+      <ThyseedSsoBootstrap />
       <NavigationProgress />
       <Outlet />
       <Toaster duration={5000} />

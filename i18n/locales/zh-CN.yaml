@@ -249,6 +249,12 @@ oauth.token_failed: "{{.Provider}} 获取 Token 失败，请检查设置"
 oauth.user_info_empty: "{{.Provider}} 获取用户信息为空，请检查设置"
 oauth.trust_level_low: "Linux DO 信任等级未达到管理员设置的最低信任等级"
 
+# Thyseed 门户 SSO
+thyseed_sso.not_enabled: "未启用 Thyseed 门户 SSO 登录"
+thyseed_sso.missing_token: "缺少 SSO 访问令牌"
+thyseed_sso.invalid_token: "SSO 令牌无效或已过期"
+thyseed_sso.invalid_username: "SSO 用户名无效"
+
 # Model layer error messages
 redeem.failed: "兑换失败，请稍后重试"
 user.create_default_token_error: "创建默认令牌失败"
