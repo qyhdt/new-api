@@ -286,6 +286,8 @@ frontend_install() {
 run_frontend_dev() {
   cd "$FRONTEND_DIR"
   export VITE_REACT_APP_SERVER_URL="http://127.0.0.1:${BACKEND_PORT}"
+  export VITE_SSO_API_ORIGIN="${VITE_SSO_API_ORIGIN:-http://127.0.0.1:8081}"
+  export VITE_PORTAL_URL="${VITE_PORTAL_URL:-http://127.0.0.1:5174}"
   export BROWSER=none
   if command -v bun >/dev/null 2>&1; then
     exec bun run dev -- --port "${FRONTEND_PORT}"

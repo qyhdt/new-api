@@ -15,6 +15,7 @@ import { useAuthRedirect } from '@/features/auth/hooks/use-auth-redirect'
 import { useAuthStore, type AuthUser } from '@/stores/auth-store'
 
 const SSO_CODE_PARAM = 'sso_code'
+const DEFAULT_SSO_API_ORIGIN = 'https://portalapi.thyseed.com'
 
 function consumeSsoCodeFromUrl(): string | null {
   const params = new URLSearchParams(window.location.search)
@@ -37,7 +38,7 @@ function resolveSsoApiOrigin(status: Record<string, unknown> | null | undefined)
     status?.thyseed_sso_api_origin ??
     (status?.data as Record<string, unknown> | undefined)?.thyseed_sso_api_origin
   const fromEnv = import.meta.env.VITE_SSO_API_ORIGIN
-  const raw = (fromStatus || fromEnv || '').toString().trim()
+  const raw = (fromStatus || fromEnv || DEFAULT_SSO_API_ORIGIN).toString().trim()
   return raw.replace(/\/$/, '')
 }
 
@@ -89,13 +90,8 @@ export function useThyseedSsoCallback(options?: { redirectTo?: string }) {
   const { handleLoginSuccess } = useAuthRedirect()
   const runningRef = useRef(false)
 
-  const enabled = Boolean(
-    status?.thyseed_sso_enabled ??
-      (status?.data as Record<string, unknown> | undefined)?.thyseed_sso_enabled
-  )
-
   useEffect(() => {
-    if (!enabled || runningRef.current) return
+    if (runningRef.current) return
     const params = new URLSearchParams(window.location.search)
     const pendingCode = params.get(SSO_CODE_PARAM)
     if (!pendingCode) return
@@ -139,7 +135,7 @@ export function useThyseedSsoCallback(options?: { redirectTo?: string }) {
         runningRef.current = false
       }
     })()
-  }, [enabled, status, handleLoginSuccess, options?.redirectTo])
+  }, [status, handleLoginSuccess, options?.redirectTo])
 }
 
 export function useThyseedPortalLoginUrl() {
