@@ -58,10 +58,13 @@ func ThyseedSsoLogin(c *gin.Context) {
 }
 
 var (
-	errThyseedSsoUserDeleted       = errors.New("thyseed sso user deleted")
-	errThyseedSsoRegisterDisabled  = errors.New("thyseed sso register disabled")
-	errThyseedSsoInvalidUsername   = errors.New("thyseed sso invalid username")
+	errThyseedSsoUserDeleted      = errors.New("thyseed sso user deleted")
+	errThyseedSsoRegisterDisabled = errors.New("thyseed sso register disabled")
+	errThyseedSsoInvalidUsername  = errors.New("thyseed sso invalid username")
 )
+
+// Portal SSO 使用企业邮箱作为 username，长度远超本地注册的 UserNameMaxLength(20)。
+const thyseedSsoUsernameMaxLength = 128
 
 func extractBearerToken(header string) string {
 	header = strings.TrimSpace(header)
@@ -102,14 +105,33 @@ func normalizeThyseedUsername(username string) string {
 	return norm.NFC.String(username)
 }
 
-func findOrCreateThyseedSsoUser(c *gin.Context, username string) (*model.User, error) {
-	if username == "" || len(username) > model.UserNameMaxLength {
-		return nil, errThyseedSsoInvalidUsername
+func isValidThyseedSsoUsername(username string) bool {
+	if username == "" || len(username) > thyseedSsoUsernameMaxLength {
+		return false
 	}
 	for _, r := range username {
 		if unicode.IsControl(r) {
-			return nil, errThyseedSsoInvalidUsername
+			return false
 		}
+	}
+	return true
+}
+
+func deriveThyseedSsoDisplayName(username string) string {
+	local := username
+	if at := strings.LastIndex(username, "@"); at > 0 {
+		local = username[:at]
+	}
+	runes := []rune(local)
+	if len(runes) > model.UserNameMaxLength {
+		return string(runes[:model.UserNameMaxLength])
+	}
+	return local
+}
+
+func findOrCreateThyseedSsoUser(c *gin.Context, username string) (*model.User, error) {
+	if !isValidThyseedSsoUsername(username) {
+		return nil, errThyseedSsoInvalidUsername
 	}
 
 	user := &model.User{}
@@ -135,9 +157,14 @@ func findOrCreateThyseedSsoUser(c *gin.Context, username string) (*model.User, e
 		inviterId, _ = model.GetUserIdByAffCode(affCode.(string))
 	}
 
+	email := ""
+	if strings.Contains(username, "@") {
+		email = username
+	}
 	newUser := model.User{
 		Username:    username,
-		DisplayName: username,
+		DisplayName: deriveThyseedSsoDisplayName(username),
+		Email:       email,
 		Role:        common.ThyseedSsoDefaultRole,
 		Status:      common.UserStatusEnabled,
 	}
