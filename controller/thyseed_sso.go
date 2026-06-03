@@ -63,9 +63,6 @@ var (
 	errThyseedSsoInvalidUsername  = errors.New("thyseed sso invalid username")
 )
 
-// Portal SSO 使用企业邮箱作为 username，长度远超本地注册的 UserNameMaxLength(20)。
-const thyseedSsoUsernameMaxLength = 128
-
 func extractBearerToken(header string) string {
 	header = strings.TrimSpace(header)
 	if header == "" {
@@ -106,7 +103,7 @@ func normalizeThyseedUsername(username string) string {
 }
 
 func isValidThyseedSsoUsername(username string) bool {
-	if username == "" || len(username) > thyseedSsoUsernameMaxLength {
+	if username == "" || len(username) > model.UserNameMaxLength {
 		return false
 	}
 	for _, r := range username {
@@ -123,8 +120,8 @@ func deriveThyseedSsoDisplayName(username string) string {
 		local = username[:at]
 	}
 	runes := []rune(local)
-	if len(runes) > model.UserNameMaxLength {
-		return string(runes[:model.UserNameMaxLength])
+	if len(runes) > model.DisplayNameMaxLength {
+		return string(runes[:model.DisplayNameMaxLength])
 	}
 	return local
 }

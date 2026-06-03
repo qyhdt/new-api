@@ -36,7 +36,7 @@ func TestDeriveThyseedSsoDisplayName(t *testing.T) {
 		t.Fatalf("got %q", got)
 	}
 	longLocal := "abdelazizmohamedmousaahmedmousa"
-	if got := deriveThyseedSsoDisplayName(longLocal + "@thyseed.com"); len([]rune(got)) != model.UserNameMaxLength {
-		t.Fatalf("expected display name truncated to %d runes, got %q", model.UserNameMaxLength, got)
+	if got := deriveThyseedSsoDisplayName(longLocal + "@thyseed.com"); len([]rune(got)) != model.DisplayNameMaxLength {
+		t.Fatalf("expected display name truncated to %d runes, got %q", model.DisplayNameMaxLength, got)
 	}
 }
