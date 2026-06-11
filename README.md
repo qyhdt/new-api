@@ -1,3 +1,28 @@
+## Thyseed 部署说明
+
+本仓库基于上游 [Calcium-Ion/new-api](https://github.com/Calcium-Ion/new-api)（新一代 LLM 网关），并包含 Thyseed 定制运维。
+
+| 项 | 说明 |
+|----|------|
+| 公网入口 | `https://aiapi.thyseed.com`、`https://aicenter.thyseed.com` |
+| 架构 | edge-nginx :443 → 容器 `new-api:3000`（Go 单体，内置静态页） |
+| 目标机 | 默认 `work@43.155.195.115` |
+| 数据目录 | `/home/work/data/`（postgres / redis / log / app-data） |
+
+```bash
+# 首次新机部署（本机）
+./devops/one_click_deploy.sh
+
+# 日常更新（代码 push 后）
+./devops/deployment/deploy-remote.sh
+./devops/deployment/deploy-remote.sh --skip-build   # 仅重启
+```
+
+详细步骤见 [devops/README.md](devops/README.md)、[devops/edge-proxy/README.md](devops/edge-proxy/README.md)。  
+中文说明见 [README.zh_CN.md](README.zh_CN.md)。
+
+---
+
 <div align="center">
 
 ![new-api](/web/default/public/logo.png)
